@@ -36,7 +36,7 @@ import java.io.IOException;
 import butterknife.ButterKnife;
 import butterknife.BindViews;
 
-import static com.tag.photocaptureandgallery.Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE;
+import static com.example.welco.zerobeg.Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE;
 
 public class RegisterBeg extends AppCompatActivity implements View.OnClickListener {
 
@@ -147,7 +147,7 @@ public class RegisterBeg extends AppCompatActivity implements View.OnClickListen
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result= com.tag.photocaptureandgallery.Utility.checkPermission(RegisterBeg.this);
+                boolean result = com.example.welco.zerobeg.Utility.checkPermission(RegisterBeg.this);
                 if (items[item].equals("Take Photo")) {
                     userChoosenTask="Take Photo";
                     if(result)

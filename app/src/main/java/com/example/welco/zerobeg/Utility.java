@@ -1,4 +1,4 @@
-package com.tag.photocaptureandgallery;
+package com.example.welco.zerobeg;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -16,6 +16,14 @@ import android.support.v7.app.AlertDialog;
  */
 public class Utility {
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
+
+    //Email Validation pattern
+    public static final String regEx = "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\b";
+
+    //Fragments Tags
+    public static final String Login_Fragment = "Login_Fragment";
+    public static final String SignUp_Fragment = "SignUp_Fragment";
+    public static final String ForgotPassword_Fragment = "ForgotPassword_Fragment";
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public static boolean checkPermission(final Context context)
