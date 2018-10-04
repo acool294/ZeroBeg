@@ -21,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,7 +30,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener, NavigationView.OnNavigationItemSelectedListener //NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener //NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener
 {
 
     protected LocationManager locationManager;
@@ -39,6 +40,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private DrawerLayout mDrawerLayout;
 
     private Toolbar toolbar;
+//    LinearLayout layout2 = findViewById(R.id.user_info_view);
+
 
 
     @Override
@@ -54,14 +57,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        findViewById(R.id.place_list_view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent placeDetailTransferIntent = new Intent(MapsActivity.this, RegisterBeg.class);
-                startActivity(placeDetailTransferIntent);
-                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_in);
-            }
-        });
+        findViewById(R.id.place_list_view).setOnClickListener(this);
+//        findViewById(R.id.nav_view).setOnClickListener(this);
+
+
+//        LayoutInflater inflate = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        LinearLayout layoutLeft = (LinearLayout) inflate.inflate(
+//                R.layout.nav_header_navigation, null);
+//        layoutLeft.findViewById(R.id.imageView_12).setOnClickListener(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -71,6 +74,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+        headerView.findViewById(R.id.user_info_view).setOnClickListener(this);
 
     }
 
@@ -124,6 +130,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
+        Toast.makeText(getApplicationContext(),"onStatusChanged", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -140,6 +147,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onBackPressed() {
+        Toast.makeText(getApplicationContext(),"onBackPressed", Toast.LENGTH_SHORT).show();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -150,6 +159,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        Toast.makeText(getApplicationContext(),"onCreateOptionsMenu", Toast.LENGTH_SHORT).show();
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation, menu);
         return true;
@@ -157,6 +168,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Toast.makeText(getApplicationContext(),"onOptionsItemSelected", Toast.LENGTH_SHORT).show();
+
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -173,6 +186,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Toast.makeText(getApplicationContext(),"onNavigationItemSelected", Toast.LENGTH_SHORT).show();
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -199,8 +214,29 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Nullable
     @Override
     public ActionMode onWindowStartingSupportActionMode(ActionMode.Callback callback) {
+        Toast.makeText(getApplicationContext(),"onNavigationItemSelected", Toast.LENGTH_SHORT).show();
+
         return null;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.user_info_view:
+                Intent loginIntent = new Intent(MapsActivity.this, MainActivity.class);
+                startActivity(loginIntent);
+                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_in);
+                break;
+            case R.id.place_list_view:
+                Intent registerIntent = new Intent(MapsActivity.this, RegisterBeg.class);
+                startActivity(registerIntent);
+                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_in);
+                break;
+
+            default:
+                break;
+
+        }
+    }
 }
 

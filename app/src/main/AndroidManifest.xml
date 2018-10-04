@@ -44,6 +44,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterBeg" />
+        <activity android:name=".MainActivity" />
 
     </application>
 
